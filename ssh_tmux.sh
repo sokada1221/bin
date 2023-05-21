@@ -1,10 +1,18 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -eo pipefail
 
+help()
+{
+    echo "Usage: $(basename "$0") [ssh-args] hostname"
+}
+
+error() {
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
+}
+
 if [[ -z "$1" ]]; then
-    me="${FUNCNAME[0]}${funcstack[1]}"
-    echo "usage: $me [ssh-args] hostname"
-    exit 1
+  help
+  exit 1
 fi
 
 set -u
