@@ -2,8 +2,8 @@
 set -euo pipefail
 
 # Requirements:
-# 1. Install hub
-#   # brew install hub
+# 1. Install gh
+#   # brew install gh
 #
 # Usage:
 # clone_github.sh jgrapht/jgrapht
@@ -48,7 +48,7 @@ else
   cd ${ORGANIZATION_NAME}
 fi
 
-hub clone ${PROJECT_URI}
+gh repo clone ${PROJECT_URI}
 cd ${PROJECT_NAME}
 
 echo
