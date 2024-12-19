@@ -21,10 +21,19 @@ PROJECT_NAME=$(basename ${PROJECT_URI})
 GITHUB_URL_PREFIX="https://github.com"
 GITHUB_URL_SUFFIX=".git"
 
+CLONE_TARGET_DIR="${GIT_PROJECT_ROOT}/${ORGANIZATION_NAME}/${PROJECT_NAME}"
+CLONE_WORKING_DIR="${GIT_PROJECT_ROOT}/${ORGANIZATION_NAME}"
+# Lyft-specific overrides
+if [[ "${ORGANIZATION_NAME}" == "lyft" ]]; then
+    GIT_PROJECT_ROOT=~/src
+    CLONE_TARGET_DIR="${GIT_PROJECT_ROOT}/${PROJECT_NAME}"
+    CLONE_WORKING_DIR="${GIT_PROJECT_ROOT}"
+fi
+
 
 # 0. User confirmation
 echo "Following will be performed:"
-echo "1. Clone ${PROJECT_URI} at ${GIT_PROJECT_ROOT}/${ORGANIZATION_NAME}/${PROJECT_NAME}"
+echo "1. Clone ${PROJECT_URI} at ${CLONE_TARGET_DIR}"
 echo "Continue? (y/n)"
 read confirmation
 
@@ -34,18 +43,17 @@ fi
 
 # 1. Clone target repo and fork on Github
 echo "Cloning target repo"
-if [ -d "${GIT_PROJECT_ROOT}/${PROJECT_URI}" ]; then
+if [ -d "${CLONE_TARGET_DIR}" ]; then
   echo "${PROJECT_URI} seems to be cloned already. Do you want to clone from scratch? (y/n)"
   read confirmation
   if [ "$confirmation" = "${confirmation#[Yy]}" ]; then
       exit
   fi
-  rm -rf ${GIT_PROJECT_ROOT}/${PROJECT_URI}
-  cd ${GIT_PROJECT_ROOT}/${ORGANIZATION_NAME}
+  rm -rf ${CLONE_TARGET_DIR}
+  cd ${CLONE_WORKING_DIR}
 else
-  cd ${GIT_PROJECT_ROOT}
-  mkdir -p ${ORGANIZATION_NAME}
-  cd ${ORGANIZATION_NAME}
+  mkdir -p ${CLONE_WORKING_DIR}
+  cd ${CLONE_WORKING_DIR}
 fi
 
 gh repo clone ${PROJECT_URI}
