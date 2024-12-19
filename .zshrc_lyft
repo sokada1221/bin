@@ -1,0 +1,12 @@
+alias aggrefest-dev="cat ~/.aggrefest/development.json | jq"
+alias aggrefest-dev-all="cat ~/.aggrefest/development_all.json | jq"
+alias aggrefest-stg="cat ~/.aggrefest/staging.json | jq"
+alias aggrefest-stg-all="cat ~/.aggrefest/staging_all.json | jq"
+alias aggrefest-prod="cat ~/.aggrefest/production.json | jq"
+alias aggrefest-prod-all="cat ~/.aggrefest/production_all.json | jq"
+function aggrefest-update {
+    mkdir -p ~/.aggrefest
+    deployadmin
+    aws s3 cp s3://lyft-control-iad/aggregated_manifests ~/.aggrefest/ --recursive
+}
+alias obsadmin="oktaawsaccess clear && oktaawsaccess zimride-admin-observability"
