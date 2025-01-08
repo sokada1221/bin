@@ -2,8 +2,8 @@
 set -euo pipefail
 
 # Requirements:
-# 1. Install hub
-#   # brew install hub
+# 1. Install gh
+#   # brew install gh
 #
 # Usage:
 # oss_init_github.sh uber/cadence
@@ -48,20 +48,21 @@ else
   cd ${GIT_PROJECT_ROOT}
   mkdir -p ${ORGANIZATION_NAME}
   cd ${ORGANIZATION_NAME}
-  hub clone ${PROJECT_URI}
+  gh repo clone ${PROJECT_URI}
 fi
 
 cd ${PROJECT_NAME}
-hub fork --no-remote
+gh repo set-default ${PROJECT_URI}
+gh repo fork --remote
 
 # 2. Clone a fork and set upstream
 echo "Cloning a fork and configuring upstream"
 cd ${GIT_PROJECT_ROOT}
 mkdir -p ${GIT_USERNAME}
 cd ${GIT_USERNAME}
-hub clone ${GIT_USERNAME}/${PROJECT_NAME}
+gh repo clone ${GIT_USERNAME}/${PROJECT_NAME}
 cd ${PROJECT_NAME}
-git remote add upstream ${GITHUB_URL_PREFIX}/${PROJECT_URI}${GITHUB_URL_SUFFIX}
+# git remote add upstream ${GITHUB_URL_PREFIX}/${PROJECT_URI}${GITHUB_URL_SUFFIX}
 git remote set-url --push upstream no_push
 
 echo
