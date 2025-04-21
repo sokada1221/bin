@@ -3,7 +3,9 @@
 
 # aws
 alias obsadmin="aws-okta shell zimride-admin-observability"
+alias obsadminexec="aws-okta exec zimride-admin-observability -- "
 alias deployadmin="aws-okta shell zimride-admin-provisioning"
+alias deployadminexec="aws-okta exec zimride-admin-provisioning -- "
 
 # aggrefest
 alias aggrefest-dev="cat ~/.aggrefest/development.json | jq"
@@ -14,8 +16,7 @@ alias aggrefest-prod="cat ~/.aggrefest/production.json | jq"
 alias aggrefest-prod-all="cat ~/.aggrefest/production_all.json | jq"
 function aggrefest-update {
     mkdir -p ~/.aggrefest
-    deployadmin
-    aws s3 cp s3://lyft-control-iad/aggregated_manifests ~/.aggrefest/ --recursive
+    deployadminexec aws s3 cp s3://lyft-control-iad/aggregated_manifests ~/.aggrefest/ --recursive
 }
 
 # k8s - generated from lyftkube_alias.sh
