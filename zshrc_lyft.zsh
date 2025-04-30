@@ -33,3 +33,12 @@ alias infra-prd='kubectl --kubeconfig ~/.kube/clusters/infra-prd'
 alias infra-stg='kubectl --kubeconfig ~/.kube/clusters/infra-stg'
 alias stateful-prod='kubectl --kubeconfig ~/.kube/clusters/stateful-prod'
 alias stateful-staging='kubectl --kubeconfig ~/.kube/clusters/stateful-staging'
+
+# k8s - build kubeconfigs
+function kube-config-sync {
+    export KUBECONFIG=
+    for kube_cluster in $HOME/.kube/clusters/*; do
+        KUBECONFIG="${KUBECONFIG}:$kube_cluster"
+    done
+}
+kube-config-sync

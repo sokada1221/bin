@@ -14,6 +14,8 @@ error() {
 exclude_list=(
   "install.sh"
   "uninstall.sh"
+  "zshrc_lyft.zsh"
+  "zshrc_personal.zsh"
 )
 
 # Remove symlinks under ~/bin that point to this directory

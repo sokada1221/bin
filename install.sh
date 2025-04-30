@@ -14,7 +14,13 @@ error() {
 exclude_list=(
   "install.sh"
   "uninstall.sh"
+  "zshrc_lyft.zsh"
+  "zshrc_personal.zsh"
 )
+
+if [ ! -d ~/bin ]; then
+  mkdir -p ~/bin
+fi
 
 for file in *; do
   if [[ " ${exclude_list[@]} " =~ " ${file} " ]]; then
