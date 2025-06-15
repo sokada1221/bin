@@ -53,3 +53,6 @@ function kube-config-sync {
     done
 }
 kube-config-sync
+
+# aactivator
+eval "$(aactivator init)"
