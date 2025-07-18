@@ -56,3 +56,9 @@ kube-config-sync
 
 # aactivator
 eval "$(aactivator init)"
+
+# bazelisk
+alias bazel=bazelisk
+
+# spcli
+export PATH="$PATH:/Users/sokada/.spcli/bin"
