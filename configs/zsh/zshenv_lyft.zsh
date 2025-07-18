@@ -1,2 +1,2 @@
 # idldev
-eval "$(~/src/idl/idldev-tool/bin/idldev init -)"
+eval "$($HOME/src/idl/idldev-tool/bin/idldev init -)"

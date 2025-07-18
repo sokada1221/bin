@@ -61,4 +61,4 @@ eval "$(aactivator init)"
 alias bazel=bazelisk
 
 # spcli
-export PATH="$PATH:/Users/sokada/.spcli/bin"
+export PATH="$PATH:$HOME/.spcli/bin"
