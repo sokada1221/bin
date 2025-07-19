@@ -63,5 +63,7 @@ alias bazel=bazelisk
 # spcli
 export PATH="$PATH:$HOME/.spcli/bin"
 
+# protobuf@3.19: protoc gets installed here
+export PATH=$HOMEBREW_PREFIX/opt/protobuf@3.19/bin:$PATH
 # protobuf@3.27: protoc gets installed here (used solely for go, does NOT contain 'protoc', only 'protoc327'
 export PATH=$HOMEBREW_PREFIX/opt/protobuf@3.27/bin:$PATH
