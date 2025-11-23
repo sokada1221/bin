@@ -49,10 +49,17 @@ fi
 # Reference: https://zenn.dev/mozumasu/articles/mozumasu-lazy-git#%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%81%AB%E3%82%B5%E3%82%AF%E3%83%83%E3%81%A8%E7%A7%BB%E5%8B%95(ghq%2C-fzf)
 if command -v ghq >/dev/null 2>&1 && command -v bat >/dev/null 2>&1; then
   function ghq-fzf() {
-    local src=$(ghq list | fzf --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
+    local selection=$(ghq list | fzf --expect=ctrl-o --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
+    local key=$(echo "$selection" | head -1)
+    local src=$(echo "$selection" | tail -n +2)
+
     if [ -n "$src" ]; then
-      BUFFER="cd $(ghq root)/$src"
-      zle accept-line
+      if [ "$key" = "ctrl-o" ]; then
+        open "https://$src"
+      else
+        BUFFER="cd $(ghq root)/$src"
+        zle accept-line
+      fi
     fi
     zle -R -c
   }
